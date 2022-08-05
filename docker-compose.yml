@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  app:
+    image: portfolio
+    build: 
+      dockerfile: Dockerfile
+    ports: 
+      - 3000:3000
+    volumes: 
+      - ./:/home/app
+      - /home/app-cache/node_modules
+    command: ["/bin/bash", "/home/app-cache/entrypoint.sh"]
+volumes: 
+  node_modules:
