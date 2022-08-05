@@ -1,0 +1,17 @@
+FROM node:14
+RUN npm install -g eslint prettier
+
+RUN mkdir /home/app-cache
+WORKDIR /home/app-cache
+
+COPY package.json ./
+RUN npm install
+
+COPY styles ./styles
+COPY tailwind.config.js ./
+RUN npm run build:tailwind
+
+RUN mkdir -p /home/app
+WORKDIR /home/app
+
+COPY entrypoint.sh /home/app-cache/
