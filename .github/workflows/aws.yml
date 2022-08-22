@@ -37,13 +37,12 @@ env:
 
 permissions:
   contents: read
-
+  id-token: write
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
-
     steps:
     - name: Checkout
       uses: actions/checkout@v3
