@@ -1,11 +1,16 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 // components
 
-import Navbar from "components/Navbars/AuthNavbar.js";
-import Footer from "components/Footers/Footer.js";
+import Navbar from 'components/Navbars/AuthNavbar.js';
+import Footer from 'components/Footers/Footer.js';
 
+
+/**
+ *
+ * @return {Component} Landing Page
+ */
 export default function Landing() {
   return (
     <>
@@ -16,7 +21,7 @@ export default function Landing() {
             className="absolute top-0 w-full h-full bg-center bg-cover"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80')",
+                'url(\'https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80\')',
             }}
           >
             <span
@@ -42,7 +47,7 @@ export default function Landing() {
           </div>
           <div
             className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-16"
-            style={{ transform: "translateZ(0)" }}
+            style={{transform: 'translateZ(0)'}}
           >
             <svg
               className="absolute bottom-0 overflow-hidden"
@@ -119,15 +124,15 @@ export default function Landing() {
                   Working with us is a pleasure
                 </h3>
                 <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                  Don't let your uses guess by attaching tooltips and popoves to
-                  any element. Just make sure you enable them first via
-                  JavaScript.
+                  Don&lsquo;t let your uses guess by attaching tooltips and
+                  popoves to any element. Just make sure you enable
+                  them first via JavaScript.
                 </p>
                 <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-600">
                   The kit comes with three pre-built pages to help you get
-                  started faster. You can change the text and images and you're
-                  good to go. Just make sure you enable them first via
-                  JavaScript.
+                  started faster. You can change the text and images and
+                  you&lsquo;re good to go. Just make sure you enable
+                  them first via JavaScript.
                 </p>
                 <Link href="/">
                   <a href="#pablo" className="font-bold text-blueGray-700 mt-8">
@@ -173,7 +178,7 @@ export default function Landing() {
         <section className="relative py-20">
           <div
             className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
-            style={{ transform: "translateZ(0)" }}
+            style={{transform: 'translateZ(0)'}}
           >
             <svg
               className="absolute bottom-0 overflow-hidden"
@@ -209,7 +214,7 @@ export default function Landing() {
                   <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
                     The extension comes with three pre-built pages to help you
                     get started faster. You can change the text and images and
-                    you're good to go.
+                    you&lsquo;re good to go.
                   </p>
                   <ul className="list-none mt-6">
                     <li className="py-2">
@@ -421,7 +426,7 @@ export default function Landing() {
         <section className="pb-20 relative block bg-blueGray-800">
           <div
             className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
-            style={{ transform: "translateZ(0)" }}
+            style={{transform: 'translateZ(0)'}}
           >
             <svg
               className="absolute bottom-0 overflow-hidden"
@@ -462,7 +467,7 @@ export default function Landing() {
                 </h6>
                 <p className="mt-2 mb-4 text-blueGray-400">
                   Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  the bulk of the card&lsquo;s content.
                 </p>
               </div>
               <div className="w-full lg:w-3/12 px-4 text-center">
@@ -474,7 +479,7 @@ export default function Landing() {
                 </h5>
                 <p className="mt-2 mb-4 text-blueGray-400">
                   Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  the bulk of the card&lsquo;s content.
                 </p>
               </div>
               <div className="w-full lg:w-3/12 px-4 text-center">
@@ -486,7 +491,7 @@ export default function Landing() {
                 </h5>
                 <p className="mt-2 mb-4 text-blueGray-400">
                   Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  the bulk of the card&lsquo;s content.
                 </p>
               </div>
             </div>

@@ -1,0 +1,52 @@
+# Dependency Image
+
+FROM node:14-alpine AS deps
+
+ENV NODE_ENV=production
+
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN yarn install --frozen-lockfile
+
+# Builder Image
+FROM node:14-alpine AS builder
+
+
+ENV NODE_ENV=production
+WORKDIR /app
+
+COPY package.json package-lock.json jsconfig.json ./
+COPY --from=deps /app/node_modules ./node_modules
+
+COPY pages ./pages
+COPY public ./public
+COPY layouts ./layouts
+COPY styles ./styles
+COPY components ./components
+
+RUN yarn build
+
+# Production Image
+FROM node:14-alpine AS runner 
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+
+# COPY --from=builder --chown=nextjs:nodejs /app/./next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+# COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
+RUN ls
+USER nextjs
+
+CMD ["node", ".next/server/init-server.js.js"]
