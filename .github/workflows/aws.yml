@@ -42,7 +42,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: Portfolio
+    environment: ortfolio
     steps:
     - name: Checkout
       uses: actions/checkout@v3
