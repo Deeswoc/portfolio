@@ -101,6 +101,6 @@ jobs:
 
             echo "$ECR_PASSWORD" | docker login -u AWS --password-stdin $ECR_REGISTRY
             docker pull $IMAGE
-            docker stop portfolio
+            [[ "$(docker ps -a | grep portfolio)" ]] && docker stop portfolio
             docker system prune -f
             docker run --name portfolio -dit -p 80:3000 $IMAGE
