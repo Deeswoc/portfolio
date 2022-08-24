@@ -58,19 +58,19 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    # - name: Build, tag, and push image to Amazon ECR
-    #   id: build-image
-    #   env:
-    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-    #     IMAGE_TAG: portfolio
-    #   run: |
-    #     # Build a docker container and
-    #     # push it to ECR so that it can
-    #     # be deployed to ECS.
-    #     ls
-    #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile.production .
-    #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-    #     echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: portfolio
+      run: |
+        # Build a docker container and
+        # push it to ECR so that it can
+        # be deployed to ECS.
+        ls
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile.production .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
     - name: Check variables
       run: |
@@ -88,18 +88,19 @@ jobs:
       env:
         ECR_PASSWORD: ${{ steps.get_ecr_password.outputs.ecr_password }}
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE: ${{ steps.build-image.outputs.image }}
       with:
         host: ${{ secrets.DEPLOY_HOST }}
         port: ${{ secrets.DEPLOY_PORT }}
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
-        envs: ECR_PASSWORD, ECR_REGISTRY
+        envs: ECR_PASSWORD, ECR_REGISTRY, IMAGE
         script: |
             echo "Registry    : $ECR_REGISTRY"
-            echo "Repository  : $ECR_REPOSITORY"
-            echo "Tag         : $IMAGE_TAG"
+            echo "Image       : $IMAGE"
+
             echo "$ECR_PASSWORD" | docker login -u AWS --password-stdin $ECR_REGISTRY
-            docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker pull $IMAGE
             docker stop portfolio
             docker system prune -f
-            docker run --name portfolio -dit -p 80:3000 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker run --name portfolio -dit -p 80:3000 $IMAGE
