@@ -91,7 +91,7 @@ jobs:
         port: ${{ secrets.DEPLOY_PORT }}
         username: ${{ secrets.DEPLOY_USER }}
         key: ${{ secrets.DEPLOY_KEY }}
-        envs: GITHUB_USERNAME, GITHUB_TOKEN
+        envs: ECR_USERNAME, ECR_PASSWORD, ECR_REGISTRY
         script: |
             echo "Registry $ECR_REGISTRY"
             echo "$ECR_PASSWORD" | docker login -u $ECR_USERNAME --password-stdin $ECR_REGISTRY
