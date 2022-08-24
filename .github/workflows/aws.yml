@@ -87,7 +87,7 @@ jobs:
 
 
     - name: Get ECR Password
-      run: echo "aws ecr get-login-password --region us-east-1" >> $ECR_PASSWORD
+      run: echo "(aws ecr get-login-password --region us-east-1)" >> $ECR_PASSWORD
 
     - name: Print ECR Password
       run: echo "$ECR_PASSWORD"
