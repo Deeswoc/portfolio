@@ -85,6 +85,12 @@ jobs:
         echo "${{ steps.login-ecr.outputs.ecr_password }}"
         echo "${{ steps.login-ecr.outputs.registry }}"
 
+
+    - name: Get ECR Password
+      run: echo "aws ecr get-login-password --region us-east-1" >> $ECR_PASSWORD
+
+    - name: Print ECR Password
+      run: echo "$ECR_PASSWORD"
     - name: Deploy image to aws-lightsail
       uses: appleboy/ssh-action@master
       env:
@@ -100,7 +106,7 @@ jobs:
         script: |
             echo "Registry $ECR_REGISTRY"
 
-            echo "$ECR_PASSWORD" | docker login -u $ECR_USERNAME --password-stdin $ECR_REGISTRY
+            echo "$ECR_PASSWORD" | docker login -u AWS --password-stdin $ECR_REGISTRY
             docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
             docker stop portfolio
             docker system prune -f
