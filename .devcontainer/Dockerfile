@@ -7,13 +7,13 @@ RUN npm install -g eslint prettier
 # Install node modules for project and store them in a location so they aren't overwritten
 # The modules are then moved into the working direcotry after the project directory is mounted
 # Tailwind css files are also built
-RUN mkdir /home/app-cache
-WORKDIR /home/app-cache
-COPY package.json ./
-RUN npm install
-COPY styles/index.css ./styles/
-COPY tailwind.config.js ./
-RUN npm run build:tailwind
+# RUN mkdir /home/app-cache
+# WORKDIR /home/app-cache
+# COPY package.json ./
+# RUN npm install
+# COPY styles/index.css ./styles/
+# COPY tailwind.config.js ./
+# RUN npm run build:tailwind
 
 # Create project directory and set it as the working directory
 # Set owner as node
