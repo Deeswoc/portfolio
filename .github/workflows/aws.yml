@@ -91,7 +91,7 @@ jobs:
       run: echo "::set-output name=ecr_password::$(aws ecr get-login-password --region us-east-1)"
 
     - name: Print ECR Password
-      run: echo "$ECR_PASSWORD"
+      run: echo "${{ steps.get_ecr_password.outputs.ecr_password }}"
     - name: Deploy image to aws-lightsail
       uses: appleboy/ssh-action@master
       env:
