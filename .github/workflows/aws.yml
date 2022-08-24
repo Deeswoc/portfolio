@@ -84,11 +84,12 @@ jobs:
         echo "${{ steps.login-ecr.outputs.ecr_username }}"
         echo "${{ steps.login-ecr.outputs.ecr_password }}"
         echo "${{ steps.login-ecr.outputs.registry }}"
+
     - name: Deploy image to aws-lightsail
       uses: appleboy/ssh-action@master
       env:
-        ECR_USERNAME: ${{ steps.login-ecr.outputs.ecr_username }}
-        ECR_PASSWORD: ${{ steps.login-ecr.outputs.ecr_password }}
+        ECR_USERNAME: ${{ steps.login-ecr.outputs.docker_username_123456789012_dkr_ecr_aws_region_1_amazonaws_com }}
+        ECR_PASSWORD: ${{ steps.login-ecr.outputs.docker_password_123456789012_dkr_ecr_aws_region_1_amazonaws_com }}
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       with:
         host: ${{ secrets.DEPLOY_HOST }}
